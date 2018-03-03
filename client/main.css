@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+}
+
+.box-container {
+    display: flex;
+    margin-top: 50px;
+    padding: 50px;
+    border: 1px solid #000;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.box {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+    margin: 30px;
+}
+
+.blue-background {
+    background-color: blue;
+}
+
+.switch-btn {
+    margin-top: 30px;
+    width: 100px;
+}
+
+.mirror-text-wrapper {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px dashed #000;
+}
+
+.mirror-input {
+    margin-top: 30px;
+}
