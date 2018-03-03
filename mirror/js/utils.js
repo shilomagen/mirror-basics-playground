@@ -1,11 +1,11 @@
 window.Utils = (function () {
-  function Utils() {}
+  function Utils() {
+  }
 
-  Utils.prototype.simulateClickOn = function (body, {clientX, clientY}) {
+  Utils.prototype.simulateClickOn = function (body, {clientX: left, clientY: top}) {
     const clickDiv = document.createElement('div');
     clickDiv.classList.add('click-effect');
-    clickDiv.style.top = clientY;
-    clickDiv.style.left = clientX;
+    Object.assign(clickDiv.style, {top, left});
     body.appendChild(clickDiv);
     clickDiv.addEventListener('animationend', () => {
       clickDiv.parentNode.removeChild(clickDiv);
@@ -28,6 +28,12 @@ window.Utils = (function () {
     };
     Object.assign(cssTag, options);
     document.querySelector('head').appendChild(cssTag);
+  };
+
+  Utils.prototype.resetDom = function () {
+    while (document.firstChild) {
+      document.removeChild(document.firstChild);
+    }
   };
 
   return new Utils();
