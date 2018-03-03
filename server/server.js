@@ -8,10 +8,10 @@ const server = http.createServer(app);
 const sockets = {};
 const wss = new WebSocketServer({server});
 wss.on('connection', (ws, req) => {
-  if (req.url.indexOf('master') !== -1) {
-    console.log('Master connected');
-    sockets.master = ws;
-    sockets.master.id = req.headers['sec-websocket-key'];
+  if (req.url.indexOf('mirror') !== -1) {
+    console.log('Mirror connected');
+    sockets.mirror = ws;
+    sockets.mirror.id = req.headers['sec-websocket-key'];
   } else {
     console.log('Client connected');
     sockets.client = ws;
@@ -19,9 +19,9 @@ wss.on('connection', (ws, req) => {
   }
 
   ws.on('close', () => {
-    if (ws === sockets.master) {
-      console.log('Master disconnected');
-      sockets.master = null;
+    if (ws === sockets.mirror) {
+      console.log('Mirror disconnected');
+      sockets.mirror = null;
     } else {
       console.log('Client disconnected');
       sockets.client = null;
@@ -33,8 +33,8 @@ wss.on('connection', (ws, req) => {
   });
 
   ws.on('message', (data) => {
-    if (sockets.master) {
-      sockets.master.send(data);
+    if (sockets.mirror) {
+      sockets.mirror.send(data);
     }
   });
 
