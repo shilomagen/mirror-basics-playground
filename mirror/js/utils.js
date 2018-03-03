@@ -23,8 +23,7 @@ window.Utils = (function () {
     const cssTag = document.createElement('link');
     const options = {
       rel: 'stylesheet',
-      type: 'css/text',
-      href: '../styles/main.css'
+      href: 'styles/main.css'
     };
     Object.assign(cssTag, options);
     document.querySelector('head').appendChild(cssTag);
