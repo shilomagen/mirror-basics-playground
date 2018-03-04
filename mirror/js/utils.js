@@ -2,21 +2,21 @@ window.Utils = (function () {
   function Utils() {
   }
 
-  Utils.prototype.simulateClickOn = function (body, {clientX: left, clientY: top}) {
+  Utils.prototype.simulateClickOn = function (htmlElement, {clientX: left, clientY: top}) {
     const clickDiv = document.createElement('div');
     clickDiv.classList.add('click-effect');
     Object.assign(clickDiv.style, {top, left});
-    body.appendChild(clickDiv);
+    htmlElement.appendChild(clickDiv);
     clickDiv.addEventListener('animationend', () => {
       clickDiv.parentNode.removeChild(clickDiv);
     });
   };
 
-  Utils.prototype.createCursorElementOn = function (body) {
+  Utils.prototype.createCursorElementOn = function (htmlElement) {
     const cursor = document.createElement('img');
     cursor.setAttribute('src', '../assets/cursor.svg');
     cursor.classList.add('cursor');
-    return body.appendChild(cursor);
+    return htmlElement.appendChild(cursor);
   };
 
   Utils.prototype.insertCSS = function () {
