@@ -33,9 +33,7 @@ export class Client {
     console.log('Client connected to WS successfully');
     this.dts = new DomTreeSerializer(document, {
       initialize: this.handleDomInit,
-      applyChanged: () => {
-        console.log('Changed');
-      }
+      applyChanged: this.handleDomChange
     });
   };
 
@@ -62,4 +60,13 @@ export class Client {
     };
     this.sendMsg(domInitEvent);
   };
+
+  handleDomChange = (removed, moved, attributes, text) => {
+    const domChangeEvent = {
+      type: 'DOM_CHANGE',
+      eventData: {removed, moved, attributes, text}
+    };
+    this.sendMsg(domChangeEvent);
+  };
+
 }

@@ -7,7 +7,8 @@ const mirror = (function (wsAddr) {
       'MOUSE_EVENT': this.handleMouseMove.bind(this),
       'CLICK_EVENT': this.handleClick.bind(this),
       'SCROLL_EVENT': this.handleScroll.bind(this),
-      'DOM_INIT': this.handleDomInit.bind(this)
+      'DOM_INIT': this.handleDomInit.bind(this),
+      'DOM_CHANGE': this.handleDomChange.bind(this)
     };
 
     this.dtds = new DomTreeDeserializer(document, {
@@ -62,6 +63,11 @@ const mirror = (function (wsAddr) {
     this.dtds.initialize(eventData.rootId, eventData.children);
     Utils.insertCSS();
     this.cursor = Utils.createCursorElementOn(document.body);
+  };
+
+  Mirror.prototype.handleDomChange = function (eventData) {
+    const {removed, moved, attributes, text} = eventData;
+    this.dtds.applyChanged(removed, moved, attributes, text);
   };
 
   return new Mirror(wsAddr);
