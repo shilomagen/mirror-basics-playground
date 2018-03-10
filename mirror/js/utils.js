@@ -12,9 +12,8 @@ window.Utils = (function () {
     });
   };
 
-  Utils.prototype.changeCursorPosition = function(cursor, {clientX, clientY}) {
-    cursor.style.top = clientY;
-    cursor.style.left = clientX;
+  Utils.prototype.changeCursorPosition = function(cursor, {clientX: left, clientY: top}) {
+    Object.assign(cursor.style, {top, left});
   };
 
   Utils.prototype.createCursorElementOn = function (htmlElement) {
