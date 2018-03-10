@@ -12,7 +12,7 @@ window.Utils = (function () {
     });
   };
 
-  Utils.prototype.changeCursorPosition = function(cursor, {clientX: left, clientY: top}) {
+  Utils.prototype.changeCursorPosition = function(cursor, {pageX: left, pageY: top}) {
     Object.assign(cursor.style, {top, left});
   };
 

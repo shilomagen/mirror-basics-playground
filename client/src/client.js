@@ -26,8 +26,8 @@ export class Client {
     }
   }
 
-  handleMouseMove = ({clientX, clientY}) => {
-    const mouseEvent = {type: 'MOUSE_EVENT', eventData: {clientX, clientY}};
+  handleMouseMove = ({pageX, pageY}) => {
+    const mouseEvent = {type: 'MOUSE_EVENT', eventData: {pageX, pageY}};
     this.sendMsg(mouseEvent);
   };
 
