@@ -1,9 +1,9 @@
 export class Client {
   init(wsAddr) {
     this.connectToServer(wsAddr);
-    document.addEventListener('mousemove', ({clientX, clientY}) => {
+    document.addEventListener('mousemove', ({pageX, pageY}) => {
       if (this.isWSConnected()) {
-        this.wsInstance.send(JSON.stringify({clientX, clientY}));
+        this.wsInstance.send(JSON.stringify({pageX, pageY}));
       }
     });
   }

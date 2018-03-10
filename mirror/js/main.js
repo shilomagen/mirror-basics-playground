@@ -21,8 +21,8 @@ const mirror = (function (wsAddr) {
   };
 
   Mirror.prototype.handleSocketMsg = function({data}) {
-    const {clientX, clientY} = JSON.parse(data);
-    Utils.changeCursorPosition(this.cursor, {clientX, clientY});
+    const {pageX, pageY} = JSON.parse(data);
+    Utils.changeCursorPosition(this.cursor, {pageX, pageY});
   };
 
   return new Mirror(wsAddr);
