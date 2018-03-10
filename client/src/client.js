@@ -16,6 +16,7 @@ export class Client {
   initEventHandlers() {
     document.addEventListener('mousemove', this.handleMouseMove);
     document.addEventListener('click', this.handleClick);
+    document.addEventListener('scroll', this.handleScroll)
   }
 
   sendMsg(msg) {
@@ -35,4 +36,10 @@ export class Client {
     const clickEvent = {type: 'CLICK_EVENT', eventData: {clientX, clientY}};
     this.sendMsg(clickEvent);
   };
+
+  handleScroll = () => {
+    const {pageYOffset, pageXOffset} = window;
+    const scrollEvent = {type: 'SCROLL_EVENT', eventData: {pageYOffset, pageXOffset}};
+    this.sendMsg(scrollEvent);
+  }
 }
