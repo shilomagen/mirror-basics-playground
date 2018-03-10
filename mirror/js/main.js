@@ -5,7 +5,8 @@ const mirror = (function (wsAddr) {
 
     this.eventDispatcher = {
       'MOUSE_EVENT': this.handleMouseMove.bind(this),
-      'CLICK_EVENT': this.handleClick.bind(this)
+      'CLICK_EVENT': this.handleClick.bind(this),
+      'SCROLL_EVENT': this.handleScroll.bind(this)
     }
   }
 
@@ -40,6 +41,10 @@ const mirror = (function (wsAddr) {
 
   Mirror.prototype.handleClick = function (eventData) {
     Utils.simulateClickOn(document.body, eventData);
+  };
+
+  Mirror.prototype.handleScroll = function(eventData) {
+    Utils.scrollWindow(eventData.pageXOffset, eventData.pageYOffset)
   };
 
   return new Mirror(wsAddr);

@@ -12,8 +12,12 @@ window.Utils = (function () {
     });
   };
 
-  Utils.prototype.changeCursorPosition = function(cursor, {clientX: left, clientY: top}) {
+  Utils.prototype.changeCursorPosition = function (cursor, {clientX: left, clientY: top}) {
     Object.assign(cursor.style, {top, left});
+  };
+
+  Utils.prototype.scrollWindow = function (scrollX, scrollY) {
+    window.scroll(scrollX, scrollY);
   };
 
   Utils.prototype.createCursorElementOn = function (htmlElement) {
