@@ -12,9 +12,9 @@ window.Utils = (function () {
     });
   };
 
-  Utils.prototype.changeCursorPosition = function(cursor, {clientX, clientY}) {
-    cursor.style.top = clientY;
-    cursor.style.left = clientX;
+  Utils.prototype.changeCursorPosition = function(cursor, {pageX, pageY}) {
+    cursor.style.top = pageY;
+    cursor.style.left = pageX;
   };
 
   Utils.prototype.createCursorElementOn = function (htmlElement) {

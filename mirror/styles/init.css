@@ -13,3 +13,11 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.cursor {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0;
+    left: 0;
+}
