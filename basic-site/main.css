@@ -9,16 +9,13 @@ body {
     flex-flow: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 
 .box-container {
-    display: flex;
     margin-top: 20px;
+    height: 360px;
     padding: 50px;
     border: 1px solid #fff;
-    align-items: center;
-    justify-content: space-around;
 }
 
 .box {
@@ -26,6 +23,7 @@ body {
     height: 300px;
     border: 1px solid #fff;
     margin: 30px;
+    display: inline-block;
 }
 
 .blue-background {
