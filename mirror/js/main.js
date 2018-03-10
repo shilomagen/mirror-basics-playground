@@ -2,6 +2,11 @@ const mirror = (function (wsAddr) {
   function Mirror(wsAddr) {
     this.wsAddr = wsAddr;
     this.wsInstance = null;
+
+    this.eventDispatcher = {
+      'MOUSE_EVENT': this.handleMouseMove.bind(this),
+      'CLICK_EVENT': this.handleClick.bind(this)
+    }
   }
 
   Mirror.prototype.init = function () {
@@ -20,9 +25,21 @@ const mirror = (function (wsAddr) {
     return this.wsInstance.readyState === 1;
   };
 
-  Mirror.prototype.handleSocketMsg = function({data}) {
-    const {clientX, clientY} = JSON.parse(data);
-    Utils.changeCursorPosition(this.cursor, {clientX, clientY});
+  Mirror.prototype.handleSocketMsg = function ({data}) {
+    const {type, eventData} = JSON.parse(data);
+    if (this.eventDispatcher[type]) {
+      this.eventDispatcher[type](eventData);
+    } else {
+      console.log('There is no event handler for event type: ' + type);
+    }
+  };
+
+  Mirror.prototype.handleMouseMove = function (eventData) {
+    Utils.changeCursorPosition(this.cursor, eventData);
+  };
+
+  Mirror.prototype.handleClick = function (eventData) {
+    Utils.simulateClickOn(document.body, eventData);
   };
 
   return new Mirror(wsAddr);
