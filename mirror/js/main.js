@@ -6,13 +6,23 @@ const mirror = (function (wsAddr) {
     this.eventDispatcher = {
       'MOUSE_EVENT': this.handleMouseMove.bind(this),
       'CLICK_EVENT': this.handleClick.bind(this),
-      'SCROLL_EVENT': this.handleScroll.bind(this)
-    }
+      'SCROLL_EVENT': this.handleScroll.bind(this),
+      'DOM_INIT': this.handleDomInit.bind(this)
+    };
+
+    this.dtds = new DomTreeDeserializer(document, {
+      createElement: tagName => {
+        if (tagName == 'SCRIPT') {
+          var node = document.createElement('noscript');
+          node.style.display = 'none';
+          return node;
+        }
+      }
+    });
   }
 
   Mirror.prototype.init = function () {
     //Here we're gonna start everything!
-    this.cursor = Utils.createCursorElementOn(document.body);
     this.connectToServer();
   };
 
@@ -43,8 +53,15 @@ const mirror = (function (wsAddr) {
     Utils.simulateClickOn(document.body, eventData);
   };
 
-  Mirror.prototype.handleScroll = function(eventData) {
-    Utils.scrollWindow(eventData.pageXOffset, eventData.pageYOffset)
+  Mirror.prototype.handleScroll = function (eventData) {
+    Utils.scrollWindow(eventData.pageXOffset, eventData.pageYOffset);
+  };
+
+  Mirror.prototype.handleDomInit = function (eventData) {
+    Utils.resetDom();
+    this.dtds.initialize(eventData.rootId, eventData.children);
+    Utils.insertCSS();
+    this.cursor = Utils.createCursorElementOn(document.body);
   };
 
   return new Mirror(wsAddr);
