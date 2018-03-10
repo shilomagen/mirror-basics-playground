@@ -5,17 +5,24 @@ const mirror = (function (wsAddr) {
   }
 
   Mirror.prototype.init = function () {
-    this.connectToServer();
     //Here we're gonna start everything!
+    this.cursor = Utils.createCursorElementOn(document.body);
+    this.connectToServer();
   };
 
   Mirror.prototype.connectToServer = function () {
     this.wsInstance = new WebSocket(this.wsAddr);
     this.wsInstance.onopen = () => console.log('Mirror connected to WS successfully');
+    this.wsInstance.onmessage = this.handleSocketMsg.bind(this);
   };
 
   Mirror.prototype.isWSConnected = function () {
     return this.wsInstance.readyState === 1;
+  };
+
+  Mirror.prototype.handleSocketMsg = function({data}) {
+    const {clientX, clientY} = JSON.parse(data);
+    Utils.changeCursorPosition(this.cursor, {clientX, clientY});
   };
 
   return new Mirror(wsAddr);

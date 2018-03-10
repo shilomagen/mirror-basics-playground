@@ -12,9 +12,14 @@ window.Utils = (function () {
     });
   };
 
+  Utils.prototype.changeCursorPosition = function(cursor, {clientX, clientY}) {
+    cursor.style.top = clientY;
+    cursor.style.left = clientX;
+  };
+
   Utils.prototype.createCursorElementOn = function (htmlElement) {
     const cursor = document.createElement('img');
-    cursor.setAttribute('src', '../assets/cursor.svg');
+    cursor.setAttribute('src', 'assets/cursor.svg');
     cursor.classList.add('cursor');
     return htmlElement.appendChild(cursor);
   };
