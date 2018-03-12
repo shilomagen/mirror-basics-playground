@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('#switchColorBtn')
-    .addEventListener('click', handleClick);
+    .addEventListener('click', handleSwitchColor);
   document.querySelector('#mirrorInput')
     .addEventListener('keyup', handleInputChange);
+  document.querySelector('#addDiv')
+    .addEventListener('click', handleAddDiv);
 });
 
-function handleClick() {
+function handleSwitchColor() {
   const leftBox = document.querySelector('#leftBox');
   const rightBox = document.querySelector('#rightBox');
   leftBox.classList.toggle('blue-background');
@@ -15,3 +17,9 @@ function handleClick() {
 function handleInputChange({target: {value}}) {
   document.querySelector('#mirrorText').innerText = value;
 }
+
+function handleAddDiv() {
+  const div = `<div class="new-div">I'm a new div!</div>`;
+  document.querySelector('#emptyDiv').innerHTML = div;
+}
+
