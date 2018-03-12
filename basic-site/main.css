@@ -30,7 +30,7 @@ body {
     background-color: #fff;
 }
 
-.switch-btn {
+.btn {
     margin-top: 30px;
     width: 100px;
     height: 26px;
@@ -44,4 +44,18 @@ body {
 
 .mirror-input {
     margin-top: 30px;
+}
+
+.add-div-container {
+    margin-top: 15px;
+}
+
+.new-div {
+    height: 100px;
+    width: 200px;
+    background-color: white;
+    color: purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
