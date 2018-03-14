@@ -1,5 +1,5 @@
 export class Client {
   init() {
-    console.log('Starting...')
+    console.log('Client started...')
   }
 }
