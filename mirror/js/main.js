@@ -8,10 +8,6 @@ class Mirror {
     this.wsInstance.onopen = () => console.log('Mirror connected to WS successfully');
   }
 
-  isWSConnected() {
-    return this.wsInstance.readyState === 1;
-  }
-
 }
 
 const mirror = new Mirror();
