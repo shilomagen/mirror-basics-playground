@@ -1,9 +1,9 @@
 export class Client {
   init(wsAddr) {
-    this.connectToServer(wsAddr);
-  }
 
-  connectToServer(wsAddr) {
+    this.connectToWS(wsAddr);
+  }
+  connectToWS(wsAddr) {
     this.wsInstance = new WebSocket(wsAddr);
     this.wsInstance.onopen = () => console.log('Client connected to WS successfully');
   }
