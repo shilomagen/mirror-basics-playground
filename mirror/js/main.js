@@ -1,34 +1,19 @@
-const mirror = (function (wsAddr) {
-  function Mirror(wsAddr) {
-    this.wsAddr = wsAddr;
-    this.wsInstance = null;
+class Mirror {
+  init(wsAddr) {
+    this.cursor = Utils.createCursorElementOn(document.body);
+    this.connectToWS(wsAddr);
   }
 
-  Mirror.prototype.init = function () {
-    //Here we're gonna start everything!
-    this.cursor = Utils.createCursorElementOn(document.body);
-    this.connectToServer();
-  };
-
-  Mirror.prototype.connectToServer = function () {
-    this.wsInstance = new WebSocket(this.wsAddr);
+  connectToWS(wsAddr) {
+    this.wsInstance = new WebSocket(wsAddr);
     this.wsInstance.onopen = () => console.log('Mirror connected to WS successfully');
-    this.wsInstance.onmessage = this.handleSocketMsg.bind(this);
-  };
+    this.wsInstance.onmessage = ({data}) => {
+      const {pageX, pageY} = JSON.parse(data);
+      this.cursor.style.top = pageY;
+      this.cursor.style.left = pageX;
+    }
+  }
+}
 
-  Mirror.prototype.isWSConnected = function () {
-    return this.wsInstance.readyState === 1;
-  };
-
-  Mirror.prototype.handleSocketMsg = function({data}) {
-    const {pageX, pageY} = JSON.parse(data);
-    Utils.changeCursorPosition(this.cursor, {pageX, pageY});
-  };
-
-  return new Mirror(wsAddr);
-
-})('ws://localhost:4000/mirror');
-
-
-mirror.init();
-
+const mirror = new Mirror();
+mirror.init('ws://localhost:4000/mirror');
